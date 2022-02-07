@@ -1,6 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import webbrowser
+import pyjokes
 import datetime
 
 start = pyttsx3.init("sapi5")
@@ -48,5 +49,13 @@ if __name__=="__main__" :
             speak(results)
         elif 'open youtube' in query:
             webbrowser.open("youtube.com")
-        
- 
+        elif "jokes" in query:
+            jokes = pyjokes.get_joke(language="en",category="all")
+            speak(jokes)
+        elif 'search' in query or 'play' in query:
+            query = query.replace("search", "")
+            query = query.replace("play", "")         
+            webbrowser.open(query)
+        elif 'the time' in query:
+            strTime = datetime.datetime.now().strftime("% H:% M:% S")   
+            speak(f"Sir, the time is {strTime}")
